@@ -55,5 +55,13 @@ namespace EmployeeApp.Tests
 
             Assert.Throws<Exception>(() => _service.GetEmployeeById(1));
         }
+
+        [Fact]
+        public void AddEmployee_ValidEmployee_CallsRepositoryAdd()
+        {
+            var emp = new Employee { Id = 1, Name = "John" };
+            _service.AddEmployee(emp);
+            _mockRepo.Verify(r => r.Add(emp), Times.Once);
+        }
     }
 }
